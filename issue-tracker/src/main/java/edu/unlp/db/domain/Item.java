@@ -91,12 +91,12 @@ public class Item {
 		// esto lo hago para poder editar sin cambiar el estado
 		if(state2.equals(this.state))
 			return;
-		type.changeStateToItem(state2, this);
 		ItemStateHistory itemStateHistory = new ItemStateHistory();
 		itemStateHistory.setChangedBy(changedBy);
 		itemStateHistory.setChangedDate(new Date());
-		itemStateHistory.setFromState(state);
+		itemStateHistory.setFromState(this.state);
 		itemStateHistory.setToState(state2);
+		type.changeStateToItem(state2, this);
 		stateHistory.add(itemStateHistory);
 		
 	}
