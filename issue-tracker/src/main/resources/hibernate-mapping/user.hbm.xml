@@ -12,7 +12,7 @@
 			length="20" unique="true"/>
 		<property name="password" column="PASSWORD" type="java.lang.String"
 			length="20" />
-		<set name="teams" table="USER_TEAM">
+		<set name="teams" table="USER_TEAM" sort="natural">
 			<key column="USER_ID" />
 			<many-to-many column="TEAM_ID" class="edu.unlp.db.domain.Team" />
 		</set>

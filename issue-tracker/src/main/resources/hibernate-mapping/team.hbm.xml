@@ -10,7 +10,7 @@
 		<version name="version" column="VERSION"></version>
 		<property name="name" column="NAME" type="java.lang.String"
 			length="20" unique="true" />
-		<set name="users" table="USER_TEAM">
+		<set name="users" table="USER_TEAM" sort="natural">
 			<key column="TEAM_ID" />
 			<many-to-many column="USER_ID" class="edu.unlp.db.domain.User" />
 		</set>

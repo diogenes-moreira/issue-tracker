@@ -13,11 +13,11 @@
 		<property name="description" column="DESCRIPTION" type="java.lang.String"
 			length="1000" />
 		<property name="created" column="CREATED" type="java.util.Date" />
-		<set name="comments"  cascade="all-delete-orphan">
+		<set name="comments"  cascade="all-delete-orphan" sort="natural">
 			<key column="ITEM_ID" />
 			<one-to-many class="edu.unlp.db.domain.ItemComment" />
 		</set>
-		<set name="stateHistory" cascade="all-delete-orphan">
+		<set name="stateHistory" cascade="all-delete-orphan" sort="natural">
 			<key column="ITEM_ID" />
 			<one-to-many class="edu.unlp.db.domain.ItemStateHistory" />
 		</set>

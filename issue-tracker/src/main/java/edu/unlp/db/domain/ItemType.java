@@ -2,7 +2,7 @@ package edu.unlp.db.domain;
 
 import java.util.Set;
 
-public class ItemType {
+public class ItemType implements Comparable<ItemType> {
 	private long oid;
 	private int version;
 	private String name;
@@ -67,5 +67,31 @@ public class ItemType {
 	public void changeStateToItem(ItemState state, Item item) {
 		workflow.changeStateToItem(state, item);
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		ItemType other;
+		try{
+			other = (ItemType) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+	
+	public int compareTo(ItemType o) {
+		long val = this.oid - o.oid ;
+		if(val==0)
+			val = this.version - o.version;
+		return (int)val;
+	}
+	
 }

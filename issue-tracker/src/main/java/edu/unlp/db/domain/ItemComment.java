@@ -2,7 +2,7 @@ package edu.unlp.db.domain;
 
 import java.util.Date;
 
-public class ItemComment {
+public class ItemComment implements Comparable<ItemComment> {
 	private long oid;
 	private int version;
 	private String comment;
@@ -58,4 +58,36 @@ public class ItemComment {
 		this.date = date;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (oid ^ (oid >>> 32));
+		result = prime * result + version;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		ItemComment other;
+		try{
+			other = (ItemComment) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+	public int compareTo(ItemComment o) {
+		long val = this.getOid() - o.getOid() ;
+		if(val==0)
+			val = this.getVersion() - o.getVersion();
+		return (int)val;
+	}	
 }

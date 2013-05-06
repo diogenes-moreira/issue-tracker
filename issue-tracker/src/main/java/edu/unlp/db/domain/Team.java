@@ -3,7 +3,7 @@ package edu.unlp.db.domain;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class Team {
+public class Team implements Comparable<Team> {
 	private long oid;
 	private int version;
 	private String name;
@@ -38,5 +38,30 @@ public class Team {
 	}
 	public void removeUser(User user) {
 		getUsers().remove(user);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		Team other;
+		try{
+			other = (Team) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+	
+	public int compareTo(Team o) {
+		long val = this.oid - o.oid ;
+		if(val==0)
+			val = this.version - o.version;
+		return (int)val;
 	}
 }

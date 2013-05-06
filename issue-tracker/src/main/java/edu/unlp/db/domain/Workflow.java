@@ -3,7 +3,7 @@ package edu.unlp.db.domain;
 import java.util.Collection;
 import java.util.Map;
 
-public class Workflow {
+public class Workflow implements Comparable<Workflow>{
 	private long oid;
 	private int version;
 	private String name;
@@ -69,5 +69,29 @@ public class Workflow {
 			throw new RuntimeException("No es un transicion de estado valida");
 		}
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		Workflow other;
+		try{
+			other = (Workflow) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
 	
+	public int compareTo(Workflow o) {
+		long val = this.oid - o.oid ;
+		if(val==0)
+			val = this.version - o.version;
+		return (int)val;
+	}
 }

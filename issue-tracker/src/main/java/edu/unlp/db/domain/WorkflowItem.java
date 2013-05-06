@@ -3,7 +3,7 @@ package edu.unlp.db.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WorkflowItem {
+public class WorkflowItem implements Comparable<WorkflowItem>{
 	private long oid;
 	private int version;
 	private ItemState fromState;
@@ -36,6 +36,32 @@ public class WorkflowItem {
 	}
 	public void addToState(ItemState itemState){
 		getToStates().add(itemState);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		WorkflowItem other;
+		try{
+			other = (WorkflowItem) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+	
+	public int compareTo(WorkflowItem o) {
+		long val = this.oid - o.oid ;
+		if(val==0)
+			val = this.version - o.version;
+		return (int)val;
 	}
 	
 }

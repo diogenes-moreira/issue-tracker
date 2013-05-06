@@ -141,6 +141,7 @@ body {
 				<table class="table" data-bind="with:item">
 					<thead>
 						<tr>
+							<th>Id</th>
 							<th>Comentario</th>
 							<th>Usuario</th>
 							<th>Fecha</th>
@@ -148,6 +149,7 @@ body {
 					</thead>
 					<tbody data-bind="foreach: comments">
 						<tr>
+							<td data-bind="text: oid"></td>
 							<td data-bind="text: comment"></td>
 							<td data-bind="text: user"></td>
 							<td data-bind="text: date"></td>

@@ -2,7 +2,7 @@ package edu.unlp.db.domain;
 
 import java.util.Date;
 
-public class ItemStateHistory {
+public class ItemStateHistory implements Comparable<ItemStateHistory> {
 	private Long oid;
 	private int version;
 	private ItemState fromState;
@@ -48,5 +48,29 @@ public class ItemStateHistory {
 	public void setChangedBy(User changedBy) {
 		this.changedBy = changedBy;
 	}
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		ItemStateHistory other;
+		try{
+			other = (ItemStateHistory) obj;
+		}catch(ClassCastException e){
+			return false;
+		}
+		if (oid != other.oid)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+	
+	public int compareTo(ItemStateHistory o) {
+		long val = this.oid - o.oid ;
+		if(val==0)
+			val = this.version - o.version;
+		return (int)val;
+	}
 }
